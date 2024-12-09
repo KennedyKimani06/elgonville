@@ -1,0 +1,25 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Add Inventory{% endblock %}
+{% block content %}
+<h2>Add Inventory</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" class="form-control" id="quantity" name="quantity">
+    </div>
+    <div class="form-group">
+        <label for="supplier">Supplier</label>
+        <select class="form-control" id="supplier" name="supplier">
+            {% for supplier in suppliers %}
+            <option value="{{ supplier.id }}">{{ supplier.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+{% endblock %}

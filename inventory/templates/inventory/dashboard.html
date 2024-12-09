@@ -1,0 +1,43 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Inventory</h5>
+                <p class="card-text">Manage your inventory items.</p>
+                <a href="{% url 'inventory:inventory_list' %}" class="btn btn-primary">View Inventory</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Employees</h5>
+                <p class="card-text">Manage your employees.</p>
+                <a href="{% url 'inventory:employee_list' %}" class="btn btn-primary">View Employees</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Customers</h5>
+                <p class="card-text">Manage your customers.</p>
+                <a href="{% url 'inventory:customer_list' %}" class="btn btn-primary">View Customers</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <p class="card-text">Manage your orders.</p>
+                <a href="{% url 'inventory:order_list' %}" class="btn btn-primary">View Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

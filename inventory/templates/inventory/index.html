@@ -1,0 +1,12 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Elgon Ville Suppliers</h1>
+    <p class="lead">Your one-stop shop for quality cereals and commodities.</p>
+    <hr class="my-4">
+    <p>Elgon Ville Suppliers specializes in supplying top-quality cereals and other commodities to meet your needs. Our mission is to provide reliable and efficient service to our customers, ensuring that they receive the best products at competitive prices.</p>
+    <p>We pride ourselves on our extensive range of products, expert staff, and commitment to customer satisfaction. Whether you are a small business or a large enterprise, we are here to support your supply chain needs.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'inventory:inventory_list' %}" role="button">Explore Inventory</a>
+</div>
+{% endblock %}
