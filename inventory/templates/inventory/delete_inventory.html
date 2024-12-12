@@ -1,11 +1,13 @@
 {% extends 'inventory/base.html' %}
-{% block title %}Delete Inventory{% endblock %}
+{% block title %}Delete Inventory Item{% endblock %}
 {% block content %}
-<h2>Delete Inventory</h2>
-<p>Are you sure you want to delete "{{ item.name }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="{% url 'inventory:inventory_list' %}" class="btn btn-secondary">Cancel</a>
-</form>
+<div class="container mt-5">
+    <h2>Delete Inventory Item</h2>
+    <p>Are you sure you want to delete {{ item.name }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'inventory:inventory_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 {% endblock %}

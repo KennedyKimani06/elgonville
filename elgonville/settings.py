@@ -135,3 +135,7 @@ LOGOUT_REDIRECT_URL = 'index'
 
 # Email backend (for password reset functionality, optional)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]

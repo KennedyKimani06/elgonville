@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.core.exceptions import ValidationError
 from .models import CustomUser
 from .forms import CustomUserCreationForm
 
@@ -23,10 +22,5 @@ class CustomUserAdmin(UserAdmin):
     )
     search_fields = ('email',)
     ordering = ('email',)
-
-    def save_model(self, request, obj, form, change):
-        if not change and CustomUser.objects.filter(email=obj.email).exists():
-            raise ValidationError("A user with that email already exists.")
-        super().save_model(request, obj, form, change)
 
 admin.site.register(CustomUser, CustomUserAdmin)

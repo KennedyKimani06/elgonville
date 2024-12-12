@@ -1,0 +1,56 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Edit Order{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Edit Order</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="id_customer" class="form-label">Customer</label>
+                    <select name="customer" id="id_customer" class="form-control" required>
+                        {% for customer in customers %}
+                        <option value="{{ customer.id }}" {% if customer.id == form.customer.value %}selected{% endif %}>{{ customer.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="order-items" class="form-group mb-3">
+                    <label class="form-label">Items</label>
+                    {% for item in order.items.all %}
+                    <div class="order-item">
+                        <select name="items[{{ forloop.counter0 }}][inventory_item]" class="form-control mb-2" required>
+                            {% for inventory_item in inventory_items %}
+                            <option value="{{ inventory_item.id }}" {% if inventory_item.id == item.inventory_item.id %}selected{% endif %}>{{ inventory_item.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="number" name="items[{{ forloop.counter0 }}][quantity]" class="form-control mb-2" placeholder="Quantity" value="{{ item.quantity }}" required>
+                        <input type="hidden" name="items[{{ forloop.counter0 }}][price]" class="form-control mb-2" value="{{ item.price }}" required>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-item-btn" class="btn btn-secondary mb-4">Add Another Item</button>
+                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('add-item-btn').addEventListener('click', function() {
+        const orderItems = document.getElementById('order-items');
+        const itemCount = orderItems.getElementsByClassName('order-item').length;
+        const newItem = document.createElement('div');
+        newItem.classList.add('order-item');
+        newItem.innerHTML = `
+            <select name="items[${itemCount}][inventory_item]" class="form-control mb-2" required>
+                {% for item in inventory_items %}
+                <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="items[${itemCount}][quantity]" class="form-control mb-2" placeholder="Quantity" required>
+            <input type="hidden" name="items[${itemCount}][price]" value="{{ item.price }}" required>
+        `;
+        orderItems.appendChild(newItem);
+    });
+</script>
+{% endblock %}

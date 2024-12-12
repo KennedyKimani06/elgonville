@@ -1,25 +1,36 @@
 {% extends 'inventory/base.html' %}
-{% block title %}Edit Inventory{% endblock %}
+{% block title %}Edit Inventory Item{% endblock %}
 {% block content %}
-<h2>Edit Inventory</h2>
-<form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ item.name }}">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Edit Inventory Item</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="id_name" class="form-label">Name</label>
+                    <input type="text" name="name" id="id_name" class="form-control" value="{{ form.name.value }}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="id_quantity" class="form-label">Quantity</label>
+                    <input type="number" name="quantity" id="id_quantity" class="form-control" value="{{ form.quantity.value }}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="id_price_per_unit" class="form-label">Price Per Unit</label>
+                    <input type="number" name="price_per_unit" id="id_price_per_unit" class="form-control" step="0.01" value="{{ form.price_per_unit.value }}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="id_supplier" class="form-label">Supplier</label>
+                    <select name="supplier" id="id_supplier" class="form-control" required>
+                        <option value="" disabled>Select a supplier</option>
+                        {% for supplier in suppliers %}
+                        <option value="{{ supplier.id }}" {% if supplier.id == form.supplier.value %}selected{% endif %}>{{ supplier.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Save Changes</button>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ item.quantity }}">
-    </div>
-    <div class="form-group">
-        <label for="supplier">Supplier</label>
-        <select class="form-control" id="supplier" name="supplier">
-            {% for supplier in suppliers %}
-            <option value="{{ supplier.id }}" {% if supplier.id == item.supplier.id %}selected{% endif %}>{{ supplier.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+</div>
 {% endblock %}

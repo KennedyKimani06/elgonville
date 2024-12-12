@@ -8,6 +8,7 @@
         <tr>
             <th>Name</th>
             <th>Quantity</th>
+            <th>Price Per Unit</th>  <!-- Added this line -->
             <th>Supplier</th>
             <th>Actions</th>
         </tr>
@@ -17,6 +18,7 @@
         <tr>
             <td>{{ item.name }}</td>
             <td>{{ item.quantity }}</td>
+            <td>{{ item.price_per_unit }}</td>  <!-- Added this line -->
             <td>{{ item.supplier.name }}</td>
             <td>
                 <a href="{% url 'inventory:edit_inventory' item.pk %}" class="btn btn-warning">Edit</a>

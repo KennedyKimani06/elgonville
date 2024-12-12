@@ -19,7 +19,7 @@ class EmployeeForm(forms.ModelForm):
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['name', 'email']
+        fields = ['name', 'email', 'contact_number']
 
 class OrderForm(forms.ModelForm):
     class Meta:
